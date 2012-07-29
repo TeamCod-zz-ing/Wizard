@@ -165,77 +165,77 @@ __gshared chtype    acs_map[256];
 ///Close enough for now??
 /* VT100 symbols begin here */
 
-auto ACS_ULCORNER()()
+auto ACS_ULCORNER()() @property
 {   return acs_map[cast(ubyte)'l']; }
-auto ACS_LLCORNER()()
+auto ACS_LLCORNER()() @property
 {   return acs_map[cast(ubyte)'m']; }
-auto ACS_URCORNER()()
+auto ACS_URCORNER()() @property
 {   return acs_map[cast(ubyte)'k']; }
-auto ACS_LRCORNER()()
+auto ACS_LRCORNER()() @property
 {   return acs_map[cast(ubyte)'j']; }
-auto ACS_LTEE()()
+auto ACS_LTEE()() @property
 {   return acs_map[cast(ubyte)'t']; }
-auto ACS_RTEE()()
+auto ACS_RTEE()() @property
 {   return acs_map[cast(ubyte)'u']; }
-auto ACS_BTEE()()
+auto ACS_BTEE()() @property
 {   return acs_map[cast(ubyte)'v']; }
-auto ACS_TTEE()()
+auto ACS_TTEE()() @property
 {   return acs_map[cast(ubyte)'w']; }
-auto ACS_HLINE()()
+auto ACS_HLINE()() @property
 {   return acs_map[cast(ubyte)'q']; }
-auto ACS_VLINE()()
+auto ACS_VLINE()() @property
 {   return acs_map[cast(ubyte)'x']; }
-auto ACS_PLUS()()
+auto ACS_PLUS()() @property
 {   return acs_map[cast(ubyte)'n']; }
-auto ACS_S1()()
+auto ACS_S1()() @property
 {   return acs_map[cast(ubyte)'o']; }
-auto ACS_S9()()
+auto ACS_S9()() @property
 {   return acs_map[cast(ubyte)'s']; }
-auto ACS_DIAMOND()()
+auto ACS_DIAMOND()() @property
 {   return acs_map[cast(ubyte)'`']; }
-auto ACS_CKBOARD()()
+auto ACS_CKBOARD()() @property
 {   return acs_map[cast(ubyte)'a']; }
-auto ACS_DEGREE()()
+auto ACS_DEGREE()() @property
 {   return acs_map[cast(ubyte)'f']; }
-auto ACS_PLMINUS()()
+auto ACS_PLMINUS()() @property
 {   return acs_map[cast(ubyte)'g']; }
-auto ACS_BULLET()()
+auto ACS_BULLET()() @property
 {   return acs_map[cast(ubyte)'~']; }
 
 /* Teletype 5410v1 symbols begin here */
-auto ACS_LARROW()()
+auto ACS_LARROW()() @property
 {   return acs_map[cast(ubyte)',']; }
-auto ACS_RARROW()()
+auto ACS_RARROW()() @property
 {   return  acs_map[cast(ubyte)'+'];}
-auto ACS_DARROW()()
+auto ACS_DARROW()() @property
 {   return acs_map[cast(ubyte)'.']; }
-auto ACS_UARROW()()
+auto ACS_UARROW()() @property
 {   return acs_map[cast(ubyte)'-']; }
-auto ACS_BOARD()()
+auto ACS_BOARD()() @property
 {   return acs_map[cast(ubyte)'h']; }
-auto ACS_LANTERN()()
+auto ACS_LANTERN()() @property
 {   return acs_map[cast(ubyte)'i']; }
-auto ACS_BLOCK()()
-{   return acs_map[cast(ubyte)'0']; }
+auto ACS_BLOCK()() @property
+{   return acs_map[cast(chtype)'0']; }
 
 /*
  * These aren't documented, but a lot of System Vs have them anyway
  * (you can spot pprryyzz{{||}} in a lot of AT&T terminfo strings).
  * The ACS_names may not match AT&T's, our source didn't know them.
  */
-auto ACS_S3()()
+auto ACS_S3()() @property
 {   return acs_map[cast(ubyte)'p']; }
-auto ACS_S7()()
+auto ACS_S7()() @property
 {   return acs_map[cast(ubyte)'r']; }
-auto ACS_LEQUAL()()
+auto ACS_LEQUAL()() @property
 {   return acs_map[cast(ubyte)'y']; }
-auto ACS_GEQUAL()()
+auto ACS_GEQUAL()() @property
 {   return acs_map[cast(ubyte)'z']; }
-auto ACS_PI()()
+auto ACS_PI()() @property
 {   return acs_map[cast(ubyte)'{']; }
-auto ACS_NEQUAL()()
+auto ACS_NEQUAL()() @property
 {   return acs_map[cast(ubyte)'|']; }
-auto ACS_STERLING()()
+auto ACS_STERLING()() @property
 {   return acs_map[cast(ubyte)'}']; }
 
 /*
@@ -244,27 +244,27 @@ auto ACS_STERLING()()
  * be B (blank), S (single), D (double), or T (thick).  The subset defined
  * here only uses B and S.
  */
-auto ACS_BSSB()()
+auto ACS_BSSB()() @property
 {   return ACS_ULCORNER();  }
-auto ACS_SSBB()()
+auto ACS_SSBB()() @property
 {   return ACS_LLCORNER();  }
-auto ACS_BBSS()()
+auto ACS_BBSS()() @property
 {   return ACS_URCORNER();  }
-auto ACS_SBBS()()
+auto ACS_SBBS()() @property
 {   return ACS_LRCORNER();  }
-auto ACS_SBSS()()
+auto ACS_SBSS()() @property
 {   return ACS_RTEE();      }
-auto ACS_SSSB()()
+auto ACS_SSSB()() @property
 {   return ACS_LTEE();      }
-auto ACS_SSBS()()
+auto ACS_SSBS()() @property
 {   return ACS_BTEE();      }
-auto ACS_BSSS()()
+auto ACS_BSSS()() @property
 {   return ACS_TTEE();      }
-auto ACS_BSBS()()
+auto ACS_BSBS()() @property
 {   return ACS_HLINE();     }
-auto ACS_SBSB()()
+auto ACS_SBSB()() @property
 {   return ACS_VLINE();     }
-auto ACS_SSSS()()
+auto ACS_SSSS()() @property
 {   return ACS_PLUS();      }
 
 

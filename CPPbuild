@@ -1,0 +1,3 @@
+#!/usr/bin/env dash
+
+g++ -lncurses -o wizardcpp wizard.cpp
