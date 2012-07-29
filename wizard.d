@@ -3,9 +3,9 @@
 //features. in other words, ./wizard.d will work if wizard.d is executable
 //below: import a few things..
 import std.stdio; //needed only for the debug statement below
-import std.string; //only needed for toStringz mentioned below
+import std.string: toStringz; //selective import, only needed for toStringz mentioned below
 //The path and import path are important.
-import deimos.ncurses;
+import deimos.curses.ncurses; //we aren't using menu or anything else
 //version is a lovely feature. It'll compile the below code only if
 //the below exists and is defined by the compiler.
 //It would allow for a demo version and a release version to be the same code
@@ -30,12 +30,11 @@ version(DigitalMars)
 //length with string.length = 5 
 //"@" is a C-style string, it has \0 appended to the end.
 enum playerChar = "@";
-
+int y, x;
 //void main does what you'd assume
 void main()
 {   
-    int c;
-    int y, x;
+    chtype c; //ncurses specific type, any printable character. in other words, uint
     //auto keyword figures out the return type for you.
     //bad code style below, auto should not be applied to everything
     //meaninglessly.  It can obfuscate the code. I just wanted to throw in an example
@@ -49,8 +48,9 @@ void main()
     curs_set(0);
     getmaxyx(stdscr, y, x);
     
-    init_pair(1, COLOR_RED, COLOR_BLACK);
-    attron(COLOR_PAIR(1));
+    addBackground('.');
+    addWalls(ACS_BLOCK());
+
     //Below, Player(string, int, int) must match an existing this() inside Player. 
     //otherwise the default this() is called
     Player player = Player(playerChar, y/2, x/2);
@@ -73,6 +73,8 @@ void main()
         else if(c == 'q') //exit when q is pressed
             cont = false;
         clear();
+        addBackground();
+        addWalls();
         player.print;
     }
     //This is interesting, and possibly bad code.
@@ -80,6 +82,26 @@ void main()
     //It's an easy way to automatically call cleanup code.
     scope(exit) endwin();
 }
+
+void addBackground(chtype c = '.')
+{   
+    foreach(i; 1..COLS-1)
+        foreach(j; 1..LINES-1)
+            mvaddch(j, i, c);
+}
+
+void addWalls(chtype c = ACS_BLOCK) 
+{
+    foreach(tempx; 0..COLS)
+        foreach(tempy; 0..LINES)
+        {
+            if(tempx == 0 || tempy == 0) 
+                mvaddch(tempy, tempx, c);
+            if(tempx == COLS-1 || tempy == LINES-1)
+                mvaddch(tempy, tempx, c);
+        } 
+}
+
 
 //structs are created on the stack.
 //classes are on the heap.
@@ -105,25 +127,29 @@ struct Player
     //should only depend on its input. you should always get the same result from the same input.
     //No system calls are made as a result of anything a pure function does.
     //This is checked by the compiler.
-    @property pure void up()
+    //@property may come before or after the name
+    pure void up()      @property
     {   ypos--; }
-    @property pure void down()
+    pure void down()    @property
     {   ypos++; }
-    @property pure void left()
+    pure void left()    @property
     {   xpos--; }
-    @property pure void right()
+    pure void right()   @property
     {   xpos++; }
     //This calls mvprintw, which calls system code. It cannot be pure.
-    //toStringz makes a copy of a D string, adds '\0' to the end and
+    //toStringz makes a copy of a D string, adds '\0' to the end, casts to char*
     //returns the result. So it basically turns a D string into a C string
     //Oh! D allows Universal function calling. x.foo() == foo(x), x.foo(y) == foo(x, y);
-    @property void print()
-    {   mvprintw(ypos, xpos, c.toStringz()); }
+    void print()        @property
+    {   attron(A_REVERSE); 
+        mvprintw(ypos, xpos, c.toStringz()); 
+        attroff(A_REVERSE); 
+    }
 //only used when compiled with -unittest, otherwise ignored
 //you may throw errors when a unittest fails with assert
 //useful to have all of the tests in the same file as the actual code
-unittest
-{
-   //do nothing. 
-}
+    unittest
+    {
+    //do nothing. Just an example
+    }
 }
