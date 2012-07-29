@@ -1,0 +1,4 @@
+binary    dmd
+version   v2.059
+config    /etc/dmd.conf
+parse     panel_simple
