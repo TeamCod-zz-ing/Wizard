@@ -49,7 +49,7 @@ void main()
     getmaxyx(stdscr, y, x);
     
     addBackground('.');
-    addWalls(ACS_BLOCK());
+    addWalls();
 
     //Below, Player(string, int, int) must match an existing this() inside Player. 
     //otherwise the default this() is called
@@ -90,7 +90,7 @@ void addBackground(chtype c = '.')
             mvaddch(j, i, c);
 }
 
-void addWalls(chtype c = ACS_BLOCK) 
+void addWalls(chtype c = ACS_CKBOARD) 
 {
     foreach(tempx; 0..COLS)
         foreach(tempy; 0..LINES)
@@ -109,9 +109,9 @@ struct Player
 {
     //Variables in D are automatically initialized with their default values.
     //This prevents stupid errors where vars are created but not initialized.
-    string  c;      //initialezed to empty, i believe
+    string  c;      //initialized to empty, i believe
     int     xpos;   //int, ubyte, short, and long(and unsigned versions) are initialized to 0
-    int     ypos;   //floating point variables are initialized to NaN, or in other words, nonsense.
+    int     ypos;   //floating point variables are initialized to NaN(NotaNumber), or in other words, nonsense.
 
     //constructor, Allows me to define the default values.
     this(string character, int yt, int xt)
