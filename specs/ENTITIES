@@ -1,0 +1,46 @@
+Basic layout of the heirarchy for all creatures and players
+
+                 ---
+                 |E|
+                 ---
+                 / \
+                /   \
+             ---     ===
+             |M|     |P|
+             ---     ===
+            / | \
+           /  |  \
+        ===  ===  ===
+        |X|  |X|  |X|
+        ===  ===  ===
+
+*****Legend*****
+(-) Class is abstract
+(=) Class is concrete
+(E) Entity
+(M) Mob/Monster
+(P) Player
+(X) Any Mod
+
+
+****Class Descriptions*****
+
+Entity:
+	Location code:
+		vars for x,y coords
+		getters and setters for each
+		up,down,left,right //These should call the getters and setters so we can bound check in one place
+
+	Attribute code:
+		hp
+		mp
+		etc.
+
+Player:
+	Attributes unique to the player
+	Input? // I don't think so but possibly
+
+Mob:
+	Should contain AI code for monsters
+
+Classes for unique monsters should extend mob, and implement their own characteristics
